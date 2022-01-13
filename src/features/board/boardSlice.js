@@ -1,18 +1,21 @@
+
+// INITIALIZE STATE
 const initialState = [
-    {id: 0, contents: 'Provider', visible: true, matched: true}, 
-    {id: 1, contents: 'Provider', visible: true, matched: true}, 
-    {id: 2, contents: 'selector', visible: true, matched: true}, 
-    {id: 3, contents: 'selector', visible: true, matched: true}, 
-    {id: 4, contents: 'useSelector()', visible: true, matched: true}, 
-    {id: 5, contents: 'useSelector()', visible: true, matched: true}, 
-    {id: 6, contents: 'useDispatch()', visible: true, matched: true}, 
-    {id: 7, contents: 'useDispatch()', visible: true, matched: true}, 
-    {id: 8, contents: 'Pure Function', visible: true, matched: true}, 
-    {id: 9, contents: 'Pure Function', visible: true, matched: true}, 
-    {id: 10, contents: 'react-redux', visible: true, matched: true}, 
-    {id: 11, contents: 'react-redux', visible: true, matched: true}, 
+    {id: 0, contents: 'Provider', visible: true, matched: false}, 
+    {id: 1, contents: 'Provider', visible: true, matched: false}, 
+    {id: 2, contents: 'selector', visible: true, matched: false}, 
+    {id: 3, contents: 'selector', visible: true, matched: false}, 
+    {id: 4, contents: 'useSelector()', visible: true, matched: false}, 
+    {id: 5, contents: 'useSelector()', visible: true, matched: false}, 
+    {id: 6, contents: 'useDispatch()', visible: true, matched: false}, 
+    {id: 7, contents: 'useDispatch()', visible: true, matched: false}, 
+    {id: 8, contents: 'Pure Function', visible: true, matched: false}, 
+    {id: 9, contents: 'Pure Function', visible: true, matched: false}, 
+    {id: 10, contents: 'react-redux', visible: true, matched: false}, 
+    {id: 11, contents: 'react-redux', visible: true, matched: false}, 
   ];
   
+  // REDUCER FUNCTIONS
   export const boardReducer = (state = initialState, action) => {
     switch (action.type) {
       case 'board/setBoard':
@@ -71,7 +74,7 @@ const initialState = [
     return words;
   } 
   
-  // action creators
+  // ACTION FUNCTIONS
   export const setBoard = () => {
     const words = randomWords()
     return {
@@ -95,4 +98,24 @@ const initialState = [
   
   // Add selector export statments below
   
-  
+  export const selectBoard = state => {
+    return state.board.map(card => 
+      ({
+        id: card.id, 
+        contents: card.contents
+      })
+    )
+  }
+
+  export const selectVisibleIDs = state => {
+    return state.board
+      .filter(card => card.visible)
+      .map(card=> card.id)
+  }
+
+
+  export const selectMatchedIDs = state => {
+    return state.board
+      .filter(card=> card.matched)
+      .map(card=> card.id)
+  }
