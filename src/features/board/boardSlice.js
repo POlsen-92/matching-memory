@@ -1,4 +1,3 @@
-
 // INITIALIZE STATE
 const initialState = [
     {id: 0, contents: 'Provider', visible: true, matched: false}, 
